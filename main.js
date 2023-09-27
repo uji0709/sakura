@@ -1,6 +1,7 @@
 import './style.css'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 const canvas = document.querySelector('#webgl')
 const scene = new THREE.Scene()
@@ -19,6 +20,7 @@ const camera = new THREE.PerspectiveCamera(
 
 const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
+  alpha: true
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(window.devicePixelRatio)
@@ -51,6 +53,12 @@ group.rotation.x = Math.PI / 10
 
 camera.position.set(3, 0, 10)
 camera.lookAt(0, 0, 0)
+
+const controls = new OrbitControls(camera, renderer.domElement)
+controls.autoRotate = true
+// controls.target = group
+controls.update()
+
 
 function rotate() {
   if(group){
