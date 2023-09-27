@@ -23,7 +23,6 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(window.devicePixelRatio)
 
-
 const light = new THREE.PointLight( 0xffffff, 20, 50 ,1.0)
 light.position.set(2, 5, 3)
 scene.add(light)
@@ -32,38 +31,13 @@ const lightHelper = new THREE.PointLightHelper(light)
 scene.add(lightHelper)
 
 const group = new THREE.Group()
-
 scene.add(group)
-
-// async function load() {
-//   return new Promise(resove => {
-//     for(let i = 0; i < 5; i++) {
-//       const radian = i / 5 * Math.PI * 2
-//       const loader = new GLTFLoader()
-//       loader.load( '/public/rock/rock_04_4k.gltf', function ( gltf ) {
-//       gltf.scene.scale.set(1.5, 1.5, 1.5)
-//       gltf.scene.position.set(
-//         Math.cos(radian) * 5,
-//         0,
-//         Math.sin(radian) * 5
-//         )
-//       group.add( gltf.scene )
-//       }, undefined, function ( error ) {
-//       console.error( error )
-//       })
-//       resove(group)
-//     }
-//   })
-// }
 
 for(let i = 0; i < 5; i++) {
   const radian = i / 5 * Math.PI * 2
   const loader = new GLTFLoader()
-
   const sakura = await loader.loadAsync('/public/rock/rock_04_4k.gltf')
-
   const model = sakura.scene;
-  
   model.scale.set(1.5, 1.5, 1.5)
   model.position.set(
     Math.cos(radian) * 5,
@@ -71,8 +45,6 @@ for(let i = 0; i < 5; i++) {
     Math.sin(radian) * 5
     )
   group.add(model);
-
-
 }
 
 group.rotation.x = Math.PI / 10
@@ -93,7 +65,6 @@ function boxrotate() {
       group.children[i].rotation.x += 0.002
     }
   }
-  
 }
 
 const tick = () => {
