@@ -6,6 +6,10 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 const canvas = document.querySelector('#webgl')
 const scene = new THREE.Scene()
 
+scene.fog = new THREE.Fog(0XADDEFF, 7, 25);
+
+
+
 const sizes = {
   width: innerWidth,
   height: innerHeight,
@@ -54,6 +58,8 @@ const animation = () => {
     // group.children[i].position.y = Math.sin(frame * Math.PI / 300 - i / sakura_num * Math.PI * 2 + Math.PI * 3 / 4) * 3
     
     group.children[i].position.y = Math.exp(Math.sin(frame * Math.PI / 300 - i / sakura_num * Math.PI * 2 + Math.PI * 3 / 4)) * 2 - 3
+
+    // group.children[i].position.y = 3/2 * Math.cos(Math.exp(Math.sin(frame * Math.PI / 300 - i / sakura_num * Math.PI * 2 + Math.PI * 3 / 4 + 7/2 ))) * 2 - 3
     
 
     // group.children[i].position.y = 3 * Math.sin(frame * 0.02 * Math.PI / 4 + - i / sakura_num * Math.PI * 2 + Math.PI * 3 / 4) * 0.5 + 5 * Math.cos(frame * 0.01 * Math.PI / 8 - i / sakura_num * Math.PI * 2 + Math.PI * 3 / 4) * 0.5
@@ -89,6 +95,13 @@ for(let i = 0; i < sakura_num + 1; i++) {
     animation()
   }
 }
+
+const spmaterial = new THREE.SpriteMaterial({
+  map: new THREE.TextureLoader().load( 'vite.svg')
+})
+
+const sprite = new THREE.Sprite(spmaterial)
+scene.add(sprite)
 
 function easeOutCirc(x) {
   return Math.sqrt(1 - Math.pow(x - 1, 2))
